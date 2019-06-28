@@ -12,19 +12,19 @@ public class Category {
 
     }
 
+    public long getId() {
+        return mId;
+    }
+
+    public void setId(long id) {
+        mId = id;
+    }
+
     public String getType() {
         return mType;
     }
 
     public void setType(String type) {
         mType = type;
-    }
-
-    public void setId(int id) {
-        mId = id;
-    }
-
-    public long getId() {
-        return mId;
     }
 }
