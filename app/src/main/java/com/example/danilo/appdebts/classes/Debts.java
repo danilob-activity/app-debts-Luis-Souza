@@ -6,7 +6,7 @@ package com.example.danilo.appdebts.classes;
 
 public class Debts {
     private int mId;
-    private int cod_cat;
+    private Category cod_cat;
     private double valor;
     private String descricao;
     private String data_vencimento;
@@ -24,11 +24,11 @@ public class Debts {
         mId = id;
     }
 
-    public int getCod_cat() {
+    public Category getCod_cat() {
         return cod_cat;
     }
 
-    public void setCod_cat(int cod_cat) {
+    public void setCod_cat(Category cod_cat) {
         this.cod_cat = cod_cat;
     }
 
@@ -62,5 +62,17 @@ public class Debts {
 
     public void setData_pagamento(String data_pagamento) {
         this.data_pagamento = data_pagamento;
+    }
+
+    @Override
+    public String toString() {
+        return "Debts{" +
+                "mId=" + mId +
+                ", cod_cat=" + cod_cat +
+                ", valor=" + valor +
+                ", descricao='" + descricao + '\'' +
+                ", data_vencimento='" + data_vencimento + '\'' +
+                ", data_pagamento='" + data_pagamento + '\'' +
+                '}';
     }
 }

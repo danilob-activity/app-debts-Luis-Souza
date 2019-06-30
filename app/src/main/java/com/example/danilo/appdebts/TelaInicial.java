@@ -21,6 +21,7 @@ public class TelaInicial extends AppCompatActivity {
         setContentView(R.layout.activity_tela_inicial);
 
         mLayout = findViewById(R.id.Layout);
+        createConnection();
     }
 
     private void createConnection() {
