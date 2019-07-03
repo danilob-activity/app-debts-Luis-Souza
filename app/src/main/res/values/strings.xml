@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">AppDebts</string>
     <string name="sucess_conection">conectado</string>
+    <string name="title_activity_main_windows">MainWindows</string>
 </resources>
