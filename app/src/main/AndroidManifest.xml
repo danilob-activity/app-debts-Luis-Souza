@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TelaInicial">
+        <activity android:name=".MainWindows">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,9 +17,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainWindows"
-            android:label="@string/title_activity_main_windows"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".TelaInicial"
+            android:label="@string/title_activity_main_window"
+            android:theme="@style/AppTheme"></activity>
     </application>
-
 </manifest>
