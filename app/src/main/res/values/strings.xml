@@ -3,4 +3,11 @@
     <string name="sucess_conection">conectado</string>
     <string name="title_activity_main_windows">MainWindows</string>
     <string name="title_activity_main_window" />
+    <string name="PaymentDate">Data_Pagamento</string>
+    <string name="Pay">Pagar</string>
+    <string name="title_activity_insert_debts">InsertDebts</string>
+    <string name="titleInsert">New Debts</string>
+    <string name="newCategoryTitle">Insert New Category</string>
+    <string name="okMenu">Save</string>
+    <string name="cancelMenu">Cancel</string>
 </resources>

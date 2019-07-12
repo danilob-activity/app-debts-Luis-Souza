@@ -7,6 +7,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.danilo.appdebts.dao.CategoryDAO;
+import com.example.danilo.appdebts.dao.DebtsDAO;
 import com.example.danilo.appdebts.database.DataBaseHelper;
 
 public class TelaInicial extends AppCompatActivity {
@@ -22,6 +24,14 @@ public class TelaInicial extends AppCompatActivity {
 
         mLayout = findViewById(R.id.Layout);
         createConnection();
+
+        CategoryDAO catDao = new CategoryDAO(mConection);
+        DebtsDAO debtsDao = new DebtsDAO(mConection);
+
+        //catDao.insert(cat);
+        catDao.listCategories();
+        debtsDao.listDebts();
+        mConection.close();
     }
 
     private void createConnection() {

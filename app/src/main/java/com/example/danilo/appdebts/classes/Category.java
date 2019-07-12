@@ -12,9 +12,11 @@ public class Category {
 
     }
 
-    public long getId() {
-        return mId;
+    public Category(String type) {
+        mType = type;
     }
+
+    public long getId() { return mId; }
 
     public void setId(long id) {
         mId = id;

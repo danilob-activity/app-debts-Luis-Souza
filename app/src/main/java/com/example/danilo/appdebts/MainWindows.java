@@ -1,5 +1,6 @@
 package com.example.danilo.appdebts;
 
+import android.content.Intent;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -37,19 +38,23 @@ public class MainWindows extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent cad = new Intent(MainWindows.this,InsertDebts.class);
+                startActivity(cad);
+//
             }
         });
 
         mListDebts = findViewById(R.id.recycler_view_debts);
         mLayout = findViewById(R.id.layout);
         createConnection();
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager( this);
+        //GridLayoutManager gridLayoutManager = new GridLayoutManager(this,3);
+
         mListDebts.setLayoutManager(linearLayoutManager);
         mDebtsAdapter = new DebtsAdapter(mDebtsDAO.listDebts());
         mListDebts.setAdapter(mDebtsAdapter);
         mListDebts.setHasFixedSize(true);
+
     }
 
     private void createConnection() {
@@ -59,7 +64,7 @@ public class MainWindows extends AppCompatActivity {
             mDebtsDAO = new DebtsDAO(mConection);
             Snackbar.make(mLayout, R.string.sucess_conection, Snackbar.LENGTH_LONG).show();
         } catch (SQLException e) {
-            Snackbar.make(mLayout, e.toString(), Snackbar.LENGTH_LONG).show();
+            Snackbar.make(mLayout, e.toString(), Snackbar. LENGTH_LONG).show();
         }
     }
 

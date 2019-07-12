@@ -27,4 +27,20 @@ public class ScriptDLL {
         return sql.toString();
     }
 
+
+    public static String getCategories(){
+        return "select * from categoria";
+    }
+
+    public static String getCategory(){
+        return "select * from categoria where id=?";
+    }
+
+    public static String getDebts(){
+        return "select * from dividas";
+    }
+
+    public static String getDebt(){
+        return "select * from dividas where id=?";
+    }
 }
