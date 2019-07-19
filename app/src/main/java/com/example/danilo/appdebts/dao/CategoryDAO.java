@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.danilo.appdebts.classes.Category;
+import com.example.danilo.appdebts.database.ScriptDLL;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +23,27 @@ public class CategoryDAO {
         mConnection = conection;
     }
 
-    public void insert(Category cat){
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("tipo",cat.getType());
-        mConnection.insertOrThrow("categoria",null,contentValues);
-        Log.d("CategoryDAO","Inserção realizada com sucesso!");
-    }
+//    public Category insert(Category cat){
+//        ContentValues contentValues = new ContentValues();
+//        contentValues.put("tipo",cat.getType());
+//        mConnection.insertOrThrow("categoria",null,contentValues);
+//        Log.d("CategoryDAO","Inserção realizada com sucesso!");
+//    }
+        public Category insert(Category cat){
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("tipo",cat.getType());
+            //verifica se existe uma categoria com mesmo nome não inserir
+            Category catDB = getCategory(cat.getType());
+            if(catDB==null){
+                cat.setId(mConnection.insertOrThrow("categoria",null,contentValues));
+                Log.d("CategoriaDAO","Inserção realizada com sucesso!");
+            }else{
+                cat = catDB;
+            }
+            return cat;
+
+
+        }
 
     public void remove(int id){
         String[] params = new String[1];
@@ -45,13 +61,13 @@ public class CategoryDAO {
 
     public List<Category> listCategories(){
         List<Category> categories = new ArrayList<Category>();
-        Cursor result = mConnection.rawQuery("Select id, tipo from categoria",null);
+        Cursor result = mConnection.rawQuery(ScriptDLL.getCategories(),null);
         if(result.getCount()>0){
             result.moveToFirst();
             do{
                Category cat = new Category();
                cat.setId(result.getInt(result.getColumnIndexOrThrow("id")));
-               cat.setType(result.getString(result.getColumnIndexOrThrow("tipo")));
+                cat.setType(result.getString(result.getColumnIndexOrThrow("tipo")));
                categories.add(cat);
                Log.d("CategoryDAO", "Listando: "+ cat.getId()+" - "+ cat.getType());
             }while(result.moveToNext());
@@ -60,14 +76,29 @@ public class CategoryDAO {
         return categories;
     }
 
-    public Category getCategory(int id){
+    public Category getCategory(long id){
         Category cat = new Category();
         String[] params = new String[1];
         params[0] = String.valueOf(id);
-        Cursor result = mConnection.rawQuery("Select * from categoria where id='?'",params);
+        Cursor result = mConnection.rawQuery(ScriptDLL.getCategory(),params);
         if(result.getCount()>0){
             result.moveToFirst();
             cat.setId(result.getInt(result.getColumnIndexOrThrow("id")));
+            cat.setType(result.getString(result.getColumnIndexOrThrow("tipo")));
+            result.close();
+            return cat;
+        }
+        return null;
+    }
+
+    public Category getCategory(String name){
+        Category cat = new Category();
+        String [] params = new String[1];
+        params[0] = name;
+        Cursor result = mConnection.rawQuery(ScriptDLL.getCategoryName(),params);
+        if(result.getCount()>0){
+            result.moveToFirst();
+            cat.setId(result.getLong(result.getColumnIndexOrThrow("id")));
             cat.setType(result.getString(result.getColumnIndexOrThrow("tipo")));
             result.close();
             return cat;

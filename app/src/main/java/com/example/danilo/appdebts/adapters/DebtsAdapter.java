@@ -1,6 +1,7 @@
 package com.example.danilo.appdebts.adapters;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 
 import com.example.danilo.appdebts.R;
 import com.example.danilo.appdebts.classes.Debts;
+import com.example.danilo.appdebts.dao.DebtsDAO;
+import com.example.danilo.appdebts.database.DataBaseHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,11 +51,11 @@ public class DebtsAdapter extends RecyclerView.Adapter<DebtsAdapter.ViewHolderDe
     public void onBindViewHolder(@NonNull ViewHolderDebts holder, int position) {
         if (mData != null && mData.size() > 0) {
             Debts debt = mData.get(position);
-            holder.mDescription.setText(debt.getDescricao());
-            holder.mCategory.setText(debt.getCod_cat().getType());
-            holder.mDataPay.setText(debt.getData_pagamento());
-            holder.mDataPayment.setText(debt.getData_vencimento());
-            if(debt.getData_pagamento().isEmpty()){
+            holder.mDescription.setText(debt.getDescription());
+            holder.mCategory.setText(debt.getCategory().getType());
+            holder.mDataPay.setText(debt.getPayDate());
+            holder.mDataPayment.setText(debt.getPaymentDate());
+            if(debt.getPayDate().isEmpty()){
                 holder.mTextPay.setVisibility(View.GONE);
             }else{
                 holder.mTextPay.setVisibility(View.VISIBLE);
@@ -129,6 +132,22 @@ public class DebtsAdapter extends RecyclerView.Adapter<DebtsAdapter.ViewHolderDe
                     selectedItem = actualItem;
                 }
             });
+
+            mButtonDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(mData.size()>0) {
+                        Debts debt = mData.get(getLayoutPosition());
+                        DataBaseHelper mDataHelper = new DataBaseHelper(mContext);
+                        SQLiteDatabase mConection = mDataHelper.getWritableDatabase();
+                        DebtsDAO debtDAO = new DebtsDAO(mConection);
+                        debtDAO.remove(debt.getId());
+                        mData.remove(getLayoutPosition());
+                        notifyItemRemoved(getLayoutPosition());
+                    }
+                }
+            });
+
         }
     }
 

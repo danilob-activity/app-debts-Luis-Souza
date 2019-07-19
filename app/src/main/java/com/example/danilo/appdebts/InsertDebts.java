@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
 
 import com.example.danilo.appdebts.classes.Category;
 import com.example.danilo.appdebts.dao.CategoryDAO;
@@ -35,12 +36,18 @@ public class InsertDebts extends AppCompatActivity {
     EditText mEditTextDataPay;
     Spinner mSpinnerCategory;
     final Calendar myCalendar = Calendar.getInstance();
+    EditText mEditTextValue;
+    EditText mEditTextDescription;
+    Switch mSwitchPayed;
 
     //inserção no banco de dados
     CategoryDAO mCategoryDAO;
     DebtsDAO mDebtsDAO;
     private SQLiteDatabase mConection;
     private DataBaseHelper mDataHelper;
+
+    //int mCategorySelected = 0;
+    String newCategory = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +57,10 @@ public class InsertDebts extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true); //Ativar o botão
         getSupportActionBar().setTitle(R.string.titleInsert);
+
+        mEditTextValue = findViewById(R.id.editTextValue);
+        mEditTextDescription = findViewById(R.id.editTextDescription);
+        mSwitchPayed = findViewById(R.id.switchPay);
 
         mSpinnerCategory = findViewById(R.id.spinnerCategories);
 

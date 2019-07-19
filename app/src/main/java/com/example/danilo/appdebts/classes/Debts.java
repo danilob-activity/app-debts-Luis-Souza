@@ -6,15 +6,37 @@ package com.example.danilo.appdebts.classes;
 
 public class Debts {
     private int mId;
-    private Category cod_cat;
-    private double valor;
-    private String descricao;
-    private String data_vencimento;
-    private String data_pagamento;
+    private Category mCategory;
+    private double mValue;
+    private String mDescription;
+    private String mPaymentDate;
+    private String mPayDate;
 
     public Debts() {
 
     }
+
+    public Debts(Category category, float value, String description, String paymentDate, String payDate) {
+        mCategory = category;
+        mValue = value;
+        mDescription = description;
+        mPaymentDate = paymentDate;
+        mPayDate = payDate;
+    }
+
+    public Debts(Category category, float value, String paymentDate) {
+        mCategory = category;
+        mValue = value;
+        mPaymentDate = paymentDate;
+    }
+
+    public Debts(Category category, float value, String paymentDate, String payDate) {
+        mCategory = category;
+        mValue = value;
+        mPaymentDate = paymentDate;
+        mPayDate = payDate;
+    }
+
 
     public int getId() {
         return mId;
@@ -24,55 +46,55 @@ public class Debts {
         mId = id;
     }
 
-    public Category getCod_cat() {
-        return cod_cat;
+    public Category getCategory() {
+        return mCategory;
     }
 
-    public void setCod_cat(Category cod_cat) {
-        this.cod_cat = cod_cat;
+    public void setCategory(Category category) {
+        this.mCategory = category;
     }
 
-    public double getValor() {
-        return valor;
+    public double getValue() {
+        return mValue;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
+    public void setValue(double value) {
+        this.mValue = value;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescription() {
+        return mDescription;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDescription(String description) {
+        this.mDescription = description;
     }
 
-    public String getData_vencimento() {
-        return data_vencimento;
+    public String getPaymentDate() {
+        return mPaymentDate;
     }
 
-    public void setData_vencimento(String data_vencimento) {
-        this.data_vencimento = data_vencimento;
+    public void setPaymentDate(String paymentDate) {
+        this.mPaymentDate = paymentDate;
     }
 
-    public String getData_pagamento() {
-        return data_pagamento;
+    public String getPayDate() {
+        return mPayDate;
     }
 
-    public void setData_pagamento(String data_pagamento) {
-        this.data_pagamento = data_pagamento;
+    public void setPayDate(String payDate) {
+        this.mPayDate = payDate;
     }
 
     @Override
     public String toString() {
         return "Debts{" +
                 "mId=" + mId +
-                ", cod_cat=" + cod_cat +
-                ", valor=" + valor +
-                ", descricao='" + descricao + '\'' +
-                ", data_vencimento='" + data_vencimento + '\'' +
-                ", data_pagamento='" + data_pagamento + '\'' +
+                ", mCategory=" + mCategory +
+                ", mValue=" + mValue +
+                ", mDescription='" + mDescription + '\'' +
+                ", mPaymentDate='" + mPaymentDate + '\'' +
+                ", mPayDate='" + mPayDate + '\'' +
                 '}';
     }
 }
